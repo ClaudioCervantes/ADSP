@@ -39,7 +39,7 @@ X = vectorizer.fit_transform(data['Processed_Text'])
 y = data['Label']
 
 # Dividir los datos en conjuntos de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Crear y entrenar el modelo RandomForest
 classifier = RandomForestClassifier(n_estimators=100)
@@ -53,16 +53,18 @@ test_texts = [preprocess_text(extract_text_from_pdf(os.path.join(test_folder_pat
 X_new_test = vectorizer.transform(test_texts)
 new_y_pred = classifier.predict(X_new_test)
 
-print("\nPredicciones para nuevos documentos PDF:")
-for file_name, prediction in zip(test_files, new_y_pred):
-    print(f"Archivo: {file_name}, Predicción: {prediction}")
-
 # Evaluar el modelo en el conjunto de prueba
 y_pred = classifier.predict(X_test)
 print("Evaluación con el conjunto de prueba dividido del CSV:")
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Classification Report:\n", classification_report(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+print("\nPredicciones para nuevos documentos PDF:")
+for file_name, prediction in zip(test_files, new_y_pred):
+    print(f"Archivo: {file_name}, Predicción: {prediction}")
+
+
 
 
 
