@@ -12,17 +12,17 @@ nlp = spacy.load('es_core_news_sm')
 
 
 def extract_text_from_pdf(file_path):
-    """Extrae texto de un archivo PDF usando pdfplumber."""
+    # Extrae texto de un archivo PDF usando pdfplumber.
     text = ""
     with pdfplumber.open(file_path) as pdf:
         for page in pdf.pages:
-            page_text = page.extract_text() or ""  # Asegúrate de manejar None
-            text += page_text + " "  # Agregar espacio para evitar unión de palabras
+            page_text = page.extract_text() or ""
+            text += page_text + " "
     return text
 
 
 def preprocess_text(text):
-    """Preprocesa el texto utilizando spaCy para tokenización y eliminación de stopwords."""
+    # Preprocesa el texto utilizando spaCy para tokenización y eliminación de stopwords.
     doc = nlp(text)
     tokens = [token.text.lower() for token in doc if token.is_alpha and not token.is_stop]
     return ' '.join(tokens)
@@ -63,9 +63,3 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print("\nPredicciones para nuevos documentos PDF:")
 for file_name, prediction in zip(test_files, new_y_pred):
     print(f"Archivo: {file_name}, Predicción: {prediction}")
-
-
-
-
-
-
