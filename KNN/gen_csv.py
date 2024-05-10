@@ -31,7 +31,7 @@ def process_folders(base_folder):
 
 
 base_folder = r'E:\UPC\2024-1\Analitica_de_Datos_y_Sistemas_Predictivos\TF\DataSet'  # Ruta a la carpeta principal
-output_csv = 'data.csv'
+output_csv = 'data_original.csv'
 
 # Procesar todas las carpetas y recopilar los datos
 all_data = process_folders(base_folder)

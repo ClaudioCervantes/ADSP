@@ -29,7 +29,7 @@ def preprocess_text(text):
 
 
 # Carga de datos desde CSV y preprocesamiento
-data_path = "data.csv"
+data_path = "data_original.csv"
 data = pd.read_csv(data_path, delimiter=';')
 data['Processed_Text'] = data['Text'].apply(preprocess_text)
 
@@ -58,7 +58,7 @@ y_pred = classifier.predict(X_test)
 print("Evaluación con el conjunto de prueba dividido del CSV:")
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Classification Report:\n", classification_report(y_test, y_pred))
-print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+# print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
 print("\nPredicciones para nuevos documentos PDF:")
 for file_name, prediction in zip(test_files, new_y_pred):
